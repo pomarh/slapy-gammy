@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
     const { user } = useAuth();
+    const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const [role, setRole] = useState(null);
     const [loadingRole, setLoadingRole] = useState(true);
@@ -143,6 +146,12 @@ function Dashboard() {
 
     if (role !== "administrador") return <Navigate to="/" />;
 
+    // cerrar secion
+    const handleLogout = async () => {
+        await supabase.auth.signOut(); // cierra sesión en supabase
+        navigate("/"); // redirige
+    };
+
     return (
         <div className="min-h-screen bg-gray-100 p-6 md:p-10">
             {/* HEADER */}
@@ -225,6 +234,13 @@ function Dashboard() {
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-3xl font-bold">Dashboard Admin</h1>
+
+                <button onClick={handleLogout} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                    Cerrar sesión
+                </button>
             </div>
         </div>
     );
