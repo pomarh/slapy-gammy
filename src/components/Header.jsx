@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 function Header() {
     return (
         <>
-            <header className=" h-dvh bg-[url(`/img/hero.jpg`)] bg-cover bg-center">
+            <header className=" h-dvh bg-cover bg-center" style={{ backgroundImage: "url('/img/hero.jpg')" }}>
                 <div className="h-dvh bg-gray-800/50">
                     <Navbar />
                     <div className=" h-full flex flex-col justify-center items-center lg:items-start gap-6 px-6 md:px-20 text-center lg:text-left ">
