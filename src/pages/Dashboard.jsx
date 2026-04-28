@@ -134,7 +134,13 @@ function Dashboard() {
     };
 
     //  GUARDS
-    if (!user) return <Navigate to="/login" />;
+    if (user === undefined) {
+        return <p>Cargando...</p>;
+    }
+
+    if (!user) {
+        return <Navigate to="/" />;
+    }
 
     if (loadingRole) {
         return (
@@ -235,7 +241,7 @@ function Dashboard() {
                     </div>
                 ))}
             </div>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 mt-10">
                 <h1 className="text-3xl font-bold">Dashboard Admin</h1>
 
                 <button onClick={handleLogout} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
